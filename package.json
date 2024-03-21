@@ -1,26 +1,35 @@
 {
-  "name": "cattynip-dev",
-  "author": "Seol SO <hi@cattynip.dev>",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+  "name": "fivepixels-official-website",
+  "version": "0.0.1",
+  "description": "ALL ABOUT FIVEPIXELS",
+  "license": "MIT",
+  "author": "Seol SO<hi@fivepixels.dev",
+  "homepage": "https://fivepixels.dev",
+  "keywords": [
+    "portfolio",
+    "fivepixels"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fivepixels/fivepixels.dev"
   },
-  "dependencies": {
-    "@types/node": "20.4.9",
-    "@types/react": "18.2.20",
-    "@types/react-dom": "18.2.7",
-    "autoprefixer": "10.4.14",
-    "eslint": "8.47.0",
-    "eslint-config-next": "13.4.13",
-    "next": "13.4.13",
-    "postcss": "8.4.27",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "tailwindcss": "3.3.3",
-    "typescript": "5.1.6"
+  "bugs": {
+    "url": "https://github.com/fivepixels/fivepixels.dev/issues"
+  },
+  "scripts": {
+    "build": "rm -rf ./dist && bun build --outdir=dist ./src/**/*.ts",
+    "dev": "rm -rf ./dist && bun build --outdir=./dist --watch ./src/**/*.ts",
+    "lint": "bunx prettier --write . && bunx eslint --fix ."
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@typescript-eslint/eslint-plugin": "^7.3.0",
+    "@typescript-eslint/parser": "^7.3.0",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "prettier": "^3.2.5"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
   }
 }
