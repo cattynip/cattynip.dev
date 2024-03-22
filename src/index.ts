@@ -1,13 +1,11 @@
-import FivePixels from "./core/interactions/fivepixels";
+import Layout from "./core/interactions/layout";
 
 console.log("If you want to inspect my code, go to the GitHub repository.");
 console.log("My GitHub: https://github.com/fivepixels");
 console.log("Source Code: https://github.com/fivepixels/fivepixels.dev");
-console.log("Source Code: https://github.com/fivepixels/fivepixels.dev");
-console.log("Source Code: https://github.com/fivepixels/fivepixels.dev");
 
 window.onload = () => {
-  const fivepixels = new FivePixels({
+  const fivepixels = new Layout({
     styleOptions: {
       xPadding: 30,
       yMargin: 120,

@@ -5,6 +5,7 @@
   "license": "MIT",
   "author": "Seol SO<hi@fivepixels.dev",
   "homepage": "https://fivepixels.dev",
+  "type": "module",
   "keywords": [
     "portfolio",
     "fivepixels"

@@ -1,38 +1,32 @@
 import Shape from "./shape";
-import { getFivePixelsLayout, getShapeLayout } from "@core/utils/layout";
+import { getLayoutSpace, getShapeSpace } from "@core/utils/layout";
 import { convertRGBToString } from "@core/utils/colour";
-import type { Layout, Size } from "types/canvas/space";
+import type { Space, Size } from "types/canvas/space";
 import type {
-  FivePixelsHelperStatus,
-  FivePixelsOptions,
-  FivePixelsStyleOptions
-} from "types/interactions/fivepixels";
+  LayoutModes,
+  LayoutModesStatus,
+  LayoutOptions,
+  LayoutStyleOptions
+} from "types/interactions/layout";
 import type {
   ShapeConstructingOptions,
+  ShapeModes,
   ShapeType
 } from "types/interactions/shape";
 
-enum FivePixelsHelperShortcuts {
-  AWESOME = "AWESOME",
-  GRID = "GRID",
-  NUMBERING = "NUMBERING",
-  PRINT = "PRINT",
-  FULLSCREEN = "FULLSCREEN"
-}
-
-class FivePixels {
+class Layout {
   private canvas: HTMLCanvasElement;
   private pen: CanvasRenderingContext2D;
 
-  private layout: Layout;
+  private layout: Space;
   private windowSize: Size;
 
-  private helperStatus: FivePixelsHelperStatus<FivePixelsHelperShortcuts>;
-  private styleOptions: FivePixelsStyleOptions;
+  private helperStatus: LayoutModesStatus<LayoutModes>;
+  private styleOptions: LayoutStyleOptions;
   private shapes: Shape[];
 
-  constructor(fivePixelsOptions: FivePixelsOptions) {
-    this.canvas = document.querySelector("#fivepixels")!;
+  constructor(layoutOptions: LayoutOptions) {
+    this.canvas = document.querySelector("#fivepixels") as HTMLCanvasElement;
     this.pen = this.canvas.getContext("2d")!;
     this.layout = {
       x: 0,
@@ -73,7 +67,7 @@ class FivePixels {
       }
     };
 
-    this.styleOptions = fivePixelsOptions.styleOptions;
+    this.styleOptions = layoutOptions.styleOptions;
     this.shapes = [];
 
     this.init();
@@ -95,11 +89,11 @@ class FivePixels {
         shapeType,
         index: shapeIndex,
         colour: this.styleOptions.foreground,
-        size: (this.layout.width - this.styleOptions.gaps) / 2,
-        location: getShapeLayout({
+        awesomeColours: this.styleOptions.awesome,
+        layout: getShapeSpace({
           shapeIndex,
           gaps: this.styleOptions.gaps,
-          fivePixelsLayout: this.layout
+          layoutSpace: this.layout
         }),
         constructingOptions
       })
@@ -143,7 +137,7 @@ class FivePixels {
       height: window.innerHeight
     };
 
-    this.layout = getFivePixelsLayout({
+    this.layout = getLayoutSpace({
       ...this.windowSize,
       ...this.styleOptions
     });
@@ -158,27 +152,25 @@ class FivePixels {
 
   private async onKeyPressed(event: KeyboardEvent) {
     const pressedKey = event.key;
-    const isPressedKeyMatchedUp = Object.keys(FivePixelsHelperShortcuts).find(
-      currentShortcut =>
-        this.helperStatus[
-          currentShortcut as keyof FivePixelsHelperStatus<FivePixelsHelperShortcuts>
-        ].shortcut === pressedKey
-    );
-
-    if (!isPressedKeyMatchedUp) return;
 
     if (pressedKey === this.helperStatus.AWESOME.shortcut) {
       this.helperStatus.AWESOME.status = !this.helperStatus.AWESOME.status;
+      this.toggleShapeModes("AWESOME");
+
       return;
     }
 
     if (pressedKey === this.helperStatus.GRID.shortcut) {
       this.helperStatus.GRID.status = !this.helperStatus.GRID.status;
+      this.toggleShapeModes("GRID");
+
       return;
     }
 
     if (pressedKey === this.helperStatus.NUMBERING.shortcut) {
       this.helperStatus.NUMBERING.status = !this.helperStatus.NUMBERING.status;
+      this.toggleShapeModes("NUMBERING");
+
       return;
     }
 
@@ -205,6 +197,14 @@ class FivePixels {
   }
 
   private onClick() {}
+
+  private commandToShapes(callback: (currentShape: Shape) => void) {
+    this.shapes.map(callback);
+  }
+
+  private toggleShapeModes(toggledMode: ShapeModes) {
+    this.commandToShapes(currentShape => currentShape.toggleMode(toggledMode));
+  }
 }
 
-export default FivePixels;
+export default Layout;

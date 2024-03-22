@@ -1,10 +1,10 @@
 import type {
   Direction,
   HorizontalDirection,
-  Layout
+  Space
 } from "types/canvas/space";
 
-interface GetFivePixelsLayoutReceive {
+interface GetLayoutSpaceReceive {
   width: number;
   height: number;
   xPadding: number;
@@ -12,13 +12,13 @@ interface GetFivePixelsLayoutReceive {
   gaps: number;
 }
 
-export function getFivePixelsLayout({
+export function getLayoutSpace({
   width,
   height,
   xPadding,
   yMargin,
   gaps
-}: GetFivePixelsLayoutReceive): Layout {
+}: GetLayoutSpaceReceive): Space {
   const isVertialPlacement =
     ((height - yMargin * 2 - gaps * 2) / 3) * 2 + gaps < width;
 
@@ -37,17 +37,17 @@ export function getFivePixelsLayout({
   };
 }
 
-interface GetShapeLayoutReceive {
+interface GetShapeSpaceReceive {
   shapeIndex: number;
   gaps: number;
-  fivePixelsLayout: Layout;
+  layoutSpace: Space;
 }
 
-export function getShapeLayout({
+export function getShapeSpace({
   shapeIndex,
   gaps,
-  fivePixelsLayout
-}: GetShapeLayoutReceive): Layout {
+  layoutSpace: fivePixelsLayout
+}: GetShapeSpaceReceive): Space {
   const shapeSize = (fivePixelsLayout.width - gaps) / 2;
   const column = shapeIndex % 2 === 1 ? 1 : 2;
   const row = Math.ceil(shapeIndex / 2);

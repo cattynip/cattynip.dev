@@ -13,4 +13,4 @@ export interface Size {
   height: number;
 }
 
-export interface Layout extends Size, Position {}
+export interface Space extends Size, Position {}

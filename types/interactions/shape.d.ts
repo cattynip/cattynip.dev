@@ -1,20 +1,22 @@
+import type Layout from "@core/interactions/layout";
 import type { RGBColour } from "types/canvas/colour";
 import type {
   Position,
   HorizontalDirection,
-  Layout,
-  VerticalDirection
+  VerticalDirection,
+  Space
 } from "types/canvas/space";
 
 export type ShapeType = "TRIANGLE" | "SQUARE" | "CIRCLE";
 export type ShapeHeight = "LOW" | "HIGH";
+export type ShapeModes = "GRID" | "AWESOME" | "NUMBERING";
 
 export interface ShapeOptions {
   shapeType: ShapeType;
   index: number;
-  size: number;
   colour: RGBColour;
-  location: Position;
+  awesomeColours: RGBColour[];
+  layout: Space;
   constructingOptions: ShapeConstructingOptions;
 }
 
