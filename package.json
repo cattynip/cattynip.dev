@@ -16,9 +16,13 @@
   "bugs": {
     "url": "https://github.com/fivepixels/fivepixels.dev/issues"
   },
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "build": "rm -rf ./dist && bun build --outdir=dist ./src/**/*.ts ./src/index.html",
-    "dev": "rm -rf ./dist && bun build --outdir=dist --watch ./src/**/*.ts ./src/index.html",
+    "build": "bun run build.ts",
+    "dev": "nodemon",
+    "host": "bunx serve dist",
     "lint": "bunx prettier --write . && bunx eslint --fix ."
   },
   "dependencies": {
@@ -30,9 +34,15 @@
     "@typescript-eslint/parser": "^7.3.0",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
+    "nodemon": "^3.1.0",
     "prettier": "^3.2.5"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
+  },
+  "nodemonConfig": {
+    "exec": "bun run build",
+    "watch": "src",
+    "ext": "ts,html,md"
   }
 }
