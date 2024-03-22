@@ -17,9 +17,12 @@
     "url": "https://github.com/fivepixels/fivepixels.dev/issues"
   },
   "scripts": {
-    "build": "rm -rf ./dist && bun build --outdir=dist ./src/**/*.ts",
-    "dev": "rm -rf ./dist && bun build --outdir=./dist --watch ./src/**/*.ts",
+    "build": "rm -rf ./dist && bun build --outdir=dist ./src/**/*.ts ./src/index.html",
+    "dev": "rm -rf ./dist && bun build --outdir=dist --watch ./src/**/*.ts ./src/index.html",
     "lint": "bunx prettier --write . && bunx eslint --fix ."
+  },
+  "dependencies": {
+    "@vercel/edge": "^0.1.2"
   },
   "devDependencies": {
     "@types/bun": "latest",

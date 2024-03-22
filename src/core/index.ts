@@ -12,7 +12,13 @@ window.onload = () => {
       gaps: 20,
       foreground: { r: 255, g: 255, b: 255 },
       background: { r: 25, g: 25, b: 25 },
-      awesome: []
+      awesome: [
+        { r: 210, g: 160, b: 110 },
+        { r: 220, g: 170, b: 120 },
+        { r: 230, g: 180, b: 130 },
+        { r: 240, g: 190, b: 140 },
+        { r: 250, g: 200, b: 150 }
+      ]
     }
   });
 
