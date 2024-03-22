@@ -1,8 +1,4 @@
-import type {
-  Direction,
-  HorizontalDirection,
-  Space
-} from "types/canvas/space";
+import type { Direction, HorizontalDirection, Space } from "types/canvas/space";
 
 interface GetLayoutSpaceReceive {
   width: number;
