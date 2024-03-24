@@ -23,11 +23,8 @@
   "scripts": {
     "build": "bun run build.ts",
     "dev": "nodemon",
-    "host": "bunx serve dist",
+    "host": "bunx serve pages",
     "lint": "bunx prettier --write . && bunx eslint --fix ."
-  },
-  "dependencies": {
-    "@vercel/edge": "^0.1.2"
   },
   "devDependencies": {
     "@types/bun": "latest",
@@ -44,6 +41,6 @@
   "nodemonConfig": {
     "exec": "bun run build",
     "watch": "src",
-    "ext": "ts,html,md"
+    "ext": "ts,html,md,ico"
   }
 }
