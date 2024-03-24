@@ -21,9 +21,9 @@
     "dist"
   ],
   "scripts": {
-    "build": "bun run build.ts",
+    "build": "bun run ./scripts/build.ts",
     "dev": "nodemon",
-    "host": "bunx serve pages",
+    "host": "bunx serve dist",
     "lint": "bunx prettier --write . && bunx eslint --fix ."
   },
   "devDependencies": {
